@@ -14,7 +14,8 @@ class GoodDeedsController < ApplicationController
 
   # GET /good_deeds/new
   def new
-    @good_deed = GoodDeed.new
+    @good_deed = GoodDeed.new(good_guy_id: params[:good_guy_id])
+    @good_guys = GoodGuy.all
   end
 
   # GET /good_deeds/1/edit
@@ -28,7 +29,7 @@ class GoodDeedsController < ApplicationController
 
     respond_to do |format|
       if @good_deed.save
-        format.html { redirect_to @good_deed, notice: 'Good deed was successfully created.' }
+        format.html { redirect_to @good_deed.good_guy, notice: 'Good deed was successfully created.' }
         format.json { render :show, status: :created, location: @good_deed }
       else
         format.html { render :new }

@@ -18,6 +18,8 @@ gem 'bourbon'
 gem 'neat'
 gem 'bitters'
 gem 'refills'
+gem 'chosen-rails'
+gem 'font-awesome-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

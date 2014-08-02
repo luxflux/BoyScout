@@ -1,5 +1,10 @@
-<%= render partial: 'refills/hero' %>
+<%= render partial: 'refills/hero', locals: {
+  title: 'Good Boy Scouts',
+  text: 'All these guys have done some real good stuff!',
+  link: link_to('Add another good guy', new_good_guy_path, class: :button),
+} %>
 
+<div class="container" %>
 <div class="cards">
 <% @good_guys.each do |good_guy| %>
   <div class="card">
@@ -14,15 +19,33 @@
         Unfortunately this guy has not done something good, yet.
       <% end %>
       </p>
-      <%= button_to 'Add a good deed', new_good_deed_path(good_guy: good_guy) %>
+      <div class="modal">
+        <label for="modal-<%= good_guy.id %>">
+          <div class="button js-btn">Add a good deed</div>
+        </label>
+        <input class="modal-state" id="modal-<%= good_guy.id %>" type="checkbox" />
+        <div class="modal-window">
+          <div class="modal-inner">
+            <label class="modal-close" for="modal-<%= good_guy.id %>"></label>
+            <%= form_for([good_guy, good_guy.good_deeds.new]) do |f| %>
+              <h1><%= good_guy.name %> did something good</h1>
+              <p class="intro">So please describe us what this good guy has done!?</p>
+              <div class="body">
+                <%= f.text_field :title %>
+                <%= f.hidden_field :good_guy_id, value: good_guy.id %>
+                <%= f.submit %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card-stats">
+    <a class="card-stats" href="<%= good_guy_path(good_guy) %>">
       <ul>
         <li><%= good_guy.good_deeds.count %><span>Good Deeds</span></li>
       </ul>
-    </div>
+    </a>
   </div>
 <% end %>
 </div>
-
-<%= link_to 'New Good guy', new_good_guy_path %>
+</div>

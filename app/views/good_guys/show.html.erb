@@ -1,9 +1,19 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: 'refills/hero', locals: {
+  title: @good_guy.name,
+  text: "Praise him! #{@good_guy.name} did all these!",
+  link: link_to('Add another good deed', new_good_guy_good_deed_path(good_guy_id: @good_guy.id), class: :button),
+} %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @good_guy.name %>
-</p>
-
-<%= link_to 'Edit', edit_good_guy_path(@good_guy) %> |
-<%= link_to 'Back', good_guys_path %>
+<div class="container">
+<% @good_guy.good_deeds.each do |deed| %>
+<div class="comment">
+  <div class="comment-image">
+    <i class="fa fa-thumbs-o-up fa-3x fa-border"></i>
+  </div>
+  <div class="comment-content">
+    <h1><%= deed.title %></h1>
+    <p class="comment-detail">Added at <%= deed.created_at %></p>
+  </div>
+</div>
+<% end %>
+</div>

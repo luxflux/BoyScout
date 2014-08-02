@@ -1,4 +1,4 @@
-<%= form_for(@good_deed) do |f| %>
+<%= form_for([:good_guy, @good_deed]) do |f| %>
   <% if @good_deed.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@good_deed.errors.count, "error") %> prohibited this good_deed from being saved:</h2>
@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title, 'What has been done?' %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :good_guy_id %><br>
-    <%= f.text_field :good_guy_id %>
+    <%= f.label :good_guy_id, 'Who did this?' %>
+    <%= f.select :good_guy_id, options_from_collection_for_select(@good_guys, :id, :name), {}, class: 'chosen-select' %>
   </div>
   <div class="actions">
     <%= f.submit %>
