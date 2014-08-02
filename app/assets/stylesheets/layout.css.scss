@@ -1,0 +1,7 @@
+body {
+  margin: 0;
+}
+.container {
+  @include outer-container;
+  padding: 2em;
+}

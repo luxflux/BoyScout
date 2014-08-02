@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @good_deed.title %>
+</p>
+
+<p>
+  <strong>Good guy:</strong>
+  <%= @good_deed.good_guy %>
+</p>
+
+<%= link_to 'Edit', edit_good_deed_path(@good_deed) %> |
+<%= link_to 'Back', good_deeds_path %>

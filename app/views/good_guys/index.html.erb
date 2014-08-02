@@ -1,0 +1,28 @@
+<%= render partial: 'refills/hero' %>
+
+<div class="cards">
+<% @good_guys.each do |good_guy| %>
+  <div class="card">
+    <div class="card-header">
+      <%= good_guy.name %>
+    </div>
+    <div class="card-copy">
+      <p>
+      <% if good_guy.good_deeds.any? %>
+        <%= good_guy.good_deeds.sample.title %>
+      <% else %>
+        Unfortunately this guy has not done something good, yet.
+      <% end %>
+      </p>
+      <%= button_to 'Add a good deed', new_good_deed_path(good_guy: good_guy) %>
+    </div>
+    <div class="card-stats">
+      <ul>
+        <li><%= good_guy.good_deeds.count %><span>Good Deeds</span></li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<%= link_to 'New Good guy', new_good_guy_path %>
