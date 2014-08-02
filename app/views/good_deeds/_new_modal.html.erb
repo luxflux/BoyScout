@@ -1,0 +1,17 @@
+<div class="modal">
+  <input class="modal-state" id="modal-<%= good_guy.id %>" type="checkbox" />
+  <div class="modal-window">
+    <div class="modal-inner">
+      <label class="modal-close" for="modal-<%= good_guy.id %>"></label>
+      <%= form_for([good_guy, good_deed]) do |f| %>
+        <h1><%= good_guy.name %> did something good</h1>
+        <p class="intro">So please describe us what this good guy has done!?</p>
+        <div class="body">
+          <%= f.text_field :title %>
+          <%= f.hidden_field :good_guy_id, value: good_guy.id %>
+          <%= f.submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

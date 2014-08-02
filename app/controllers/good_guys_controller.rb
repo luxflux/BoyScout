@@ -28,7 +28,7 @@ class GoodGuysController < ApplicationController
 
     respond_to do |format|
       if @good_guy.save
-        format.html { redirect_to good_guys_path, notice: 'Good guy was successfully created.' }
+        format.html { redirect_to @good_guy, notice: 'Good guy was successfully created.' }
         format.json { render :show, status: :created, location: @good_guy }
       else
         format.html { render :new }

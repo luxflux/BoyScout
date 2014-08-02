@@ -1,8 +1,27 @@
 <%= render partial: 'refills/hero', locals: {
   title: 'Good Boy Scouts',
   text: 'All these guys have done some real good stuff!',
-  link: link_to('Add another good guy', new_good_guy_path, class: :button),
+  button_type: :modal,
+  modal_id: 'modal-new-good-guy',
+  modal_text: 'Add another good guy',
 } %>
+
+<div class="modal">
+  <input class="modal-state" id="modal-new-good-guy" type="checkbox" />
+  <div class="modal-window">
+    <div class="modal-inner">
+      <label class="modal-close" for="modal-new-good-guy"></label>
+      <%= form_for(GoodGuy.new) do |f| %>
+        <h1>A new Good Guy!</h1>
+        <p class="intro">What's the name of this to be worshipped guy?</p>
+        <div class="body">
+          <%= f.text_field :name %>
+          <%= f.submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <div class="container" %>
 <div class="cards">
@@ -19,26 +38,10 @@
         Unfortunately this guy has not done something good, yet.
       <% end %>
       </p>
-      <div class="modal">
-        <label for="modal-<%= good_guy.id %>">
-          <div class="button js-btn">Add a good deed</div>
-        </label>
-        <input class="modal-state" id="modal-<%= good_guy.id %>" type="checkbox" />
-        <div class="modal-window">
-          <div class="modal-inner">
-            <label class="modal-close" for="modal-<%= good_guy.id %>"></label>
-            <%= form_for([good_guy, good_guy.good_deeds.new]) do |f| %>
-              <h1><%= good_guy.name %> did something good</h1>
-              <p class="intro">So please describe us what this good guy has done!?</p>
-              <div class="body">
-                <%= f.text_field :title %>
-                <%= f.hidden_field :good_guy_id, value: good_guy.id %>
-                <%= f.submit %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
+      <label for="modal-<%= good_guy.id %>">
+        <div class="button js-btn">Add a good deed</div>
+      </label>
+      <%= render partial: 'good_deeds/new_modal', locals: { good_guy: good_guy, good_deed: good_guy.good_deeds.new } %>
     </div>
     <a class="card-stats" href="<%= good_guy_path(good_guy) %>">
       <ul>

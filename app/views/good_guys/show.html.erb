@@ -1,8 +1,12 @@
 <%= render partial: 'refills/hero', locals: {
   title: @good_guy.name,
   text: "Praise him! #{@good_guy.name} did all these!",
-  link: link_to('Add another good deed', new_good_guy_good_deed_path(good_guy_id: @good_guy.id), class: :button),
+  button_type: :modal,
+  modal_id: "modal-#{@good_guy.id}",
+  modal_text: 'Add another good deed',
 } %>
+
+<%= render partial: 'good_deeds/new_modal', locals: { good_guy: @good_guy, good_deed: GoodDeed.new } %>
 
 <div class="container">
 <% @good_guy.good_deeds.each do |deed| %>
