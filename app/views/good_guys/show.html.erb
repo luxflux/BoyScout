@@ -1,6 +1,6 @@
 <%= render partial: 'refills/hero', locals: {
   title: @good_guy.name,
-  text: "Praise him! #{@good_guy.name} did all these!",
+  text: "Praise #{@good_guy.name}! #{@good_guy.name} drugded to do all these!",
   button_type: :modal,
   modal_id: "modal-#{@good_guy.id}",
   modal_text: 'Add another good deed',
@@ -9,15 +9,26 @@
 <%= render partial: 'good_deeds/new_modal', locals: { good_guy: @good_guy, good_deed: GoodDeed.new } %>
 
 <div class="container">
-<% @good_guy.good_deeds.each do |deed| %>
-<div class="comment">
-  <div class="comment-image">
-    <i class="fa fa-thumbs-o-up fa-3x fa-border"></i>
+<% if @good_guy.good_deeds.any? %>
+  <% @good_guy.good_deeds.each do |deed| %>
+  <div class="comment">
+    <div class="comment-image">
+      <i class="fa fa-thumbs-o-up fa-3x fa-border"></i>
+    </div>
+    <div class="comment-content">
+      <h1><%= deed.title %></h1>
+      <p class="comment-detail">Added at <%= deed.created_at %></p>
+    </div>
   </div>
-  <div class="comment-content">
-    <h1><%= deed.title %></h1>
-    <p class="comment-detail">Added at <%= deed.created_at %></p>
-  </div>
-</div>
+  <% end %>
+<% else %>
+  <label for="modal-<%= @good_guy.id %>">
+    What!? No good deed done, yet!
+    <a class="js-btn">Fast, add one!</a>
+  </label>
 <% end %>
+</div>
+
+<div class="container">
+  <%= link_to 'Back to all the other good guys', good_guys_path %>
 </div>

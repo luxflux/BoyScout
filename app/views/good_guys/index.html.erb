@@ -1,5 +1,5 @@
 <%= render partial: 'refills/hero', locals: {
-  title: 'Good Boy Scouts',
+  title: 'Good Guys',
   text: 'All these guys have done some real good stuff!',
   button_type: :modal,
   modal_id: 'modal-new-good-guy',
@@ -41,11 +41,11 @@
       <label for="modal-<%= good_guy.id %>">
         <div class="button js-btn">Add a good deed</div>
       </label>
-      <%= render partial: 'good_deeds/new_modal', locals: { good_guy: good_guy, good_deed: good_guy.good_deeds.new } %>
+      <%= render partial: 'good_deeds/new_modal', locals: { good_guy: good_guy, good_deed: GoodDeed.new(good_guy: good_guy) } %>
     </div>
     <a class="card-stats" href="<%= good_guy_path(good_guy) %>">
       <ul>
-        <li><%= good_guy.good_deeds.count %><span>Good Deeds</span></li>
+        <li><%= good_guy.good_deeds.length %><span>Good Deeds</span></li>
       </ul>
     </a>
   </div>

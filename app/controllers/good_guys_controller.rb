@@ -4,7 +4,7 @@ class GoodGuysController < ApplicationController
   # GET /good_guys
   # GET /good_guys.json
   def index
-    @good_guys = GoodGuy.all
+    @good_guys = GoodGuy.all.includes(:good_deeds).shuffle
   end
 
   # GET /good_guys/1
